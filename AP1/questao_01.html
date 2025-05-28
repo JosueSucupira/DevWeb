@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questão 01</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        header {
+            padding: 60px;
+            text-align: center;
+            background: #333;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            color: #333;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .menu-lateral {
+            flex: 30%;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        .conteudo-principal {
+            flex: 70%;
+            background-color: white;
+            opacity: 0.7;
+            padding: 20px;
+        }
+
+        .section-1{
+            background-color: #333;
+            color: white;
+        }
+
+        .section-2{
+            background-color: #f1f1f1;
+            color: black;
+        }
+        .img-fake {
+            width: 100%;
+            height: 200px;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media screen and (max-width: 400px) {
+            .container, .menu-lateral {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Desenvolvimento de Software WEB</h1>
+        <p>Primeira <b>Avaliação Progressiva </b></p>
+    </header>
+
+    <div class="container">
+        <aside class="menu-lateral">
+            <h2>[Menu Lateral]</h2>
+            <nav>
+                <ul>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="conteudo-principal">
+            <h2>[Conteudo]</h2>
+            <section class="section-1">
+                <h3>Introdução ao HTML</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor laborum, obcaecati blanditiis explicabo a nam mollitia provident, rerum nemo libero repellendus dolorum alias aut. Excepturi dignissimos accusantium tempore quo quasi.</p>
+                <div class="img-fake">Imagem</div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor laborum, obcaecati blanditiis explicabo a nam mollitia provident, rerum nemo libero repellendus dolorum alias aut. Excepturi dignissimos accusantium tempore quo quasi.</p>
+                <div class="img-fake">Imagem</div>
+            </section>
+
+            <section class="section-2">
+                <h3>Introdução ao HTML</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor laborum, obcaecati blanditiis explicabo a nam mollitia provident, rerum nemo libero repellendus dolorum alias aut. Excepturi dignissimos accusantium tempore quo quasi.</p>
+                <div class="img-fake">Imagem</div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor laborum, obcaecati blanditiis explicabo a nam mollitia provident, rerum nemo libero repellendus dolorum alias aut. Excepturi dignissimos accusantium tempore quo quasi.</p>
+                <div class="img-fake">Imagem</div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer>
+        <p>josue.sucupira@alu.ufc.br</p>
+        <p>&copy; 2025.1 - Todos os direitos reservados</p>
+    </footer>
+</body>
+
+</html>

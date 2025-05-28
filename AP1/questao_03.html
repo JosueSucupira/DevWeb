@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Viewer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+
+        .container {
+            text-align: center;
+        }
+
+
+        img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+        }
+
+
+        button {
+            margin: 0 5px;
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <img id="pokemonImage"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
+            alt="Imagem do Pokémon">
+
+        <div>
+            <button id="btnVoltar" onclick="mudarPokemon(-1)">Voltar -1</button>
+            <button id="btnAdiantar" onclick="mudarPokemon(1)">Adiantar +1</button>
+        </div>
+    </div>
+
+    <script>
+
+        let numeroPokemon = 1;
+
+        const imagemElemento = document.getElementById('pokemonImage');
+
+        const botaoVoltar = document.getElementById('btnVoltar');
+        const botaoAdiantar = document.getElementById('btnAdiantar');
+        const urlBase = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
+
+
+        function mudarPokemon(valor) {
+
+            let novoNumero = numeroPokemon + valor;
+            if (novoNumero >= 1 && novoNumero <= 100) {
+                numeroPokemon = novoNumero;
+                let novaUrl = urlBase + numeroPokemon + ".svg";
+                imagemElemento.src = novaUrl;
+                botaoVoltar.disabled = (numeroPokemon === 1);
+                botaoAdiantar.disabled = (numeroPokemon === 100);
+            }
+        }
+        botaoVoltar.disabled = true;
+    </script>
+
+</body>
+
+</html>
