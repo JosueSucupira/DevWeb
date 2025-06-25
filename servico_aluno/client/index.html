@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Alunos</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <h1>Lista de Alunos</h1>
+    <div class="actions-container">
+        <a href="criar_aluno.html" class="btn-principal">Criar Novo Aluno</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Curso</th>
+                <th>IRA</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="corpo-tabela"></tbody>
+    </table>
+
+    <script>
+        const apiBaseUrl = 'http://localhost:3000/api/alunos';
+        const corpoTabela = document.getElementById('corpo-tabela');
+
+        async function renderizarLista() {
+            try {
+                const response = await fetch(apiBaseUrl);
+                const alunos = await response.json();
+                
+                corpoTabela.innerHTML = ''; 
+                alunos.forEach(aluno => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${aluno.nome}</td>
+                        <td>${aluno.curso}</td>
+                        <td>${aluno.ira}</td>
+                        <td>
+                            <a href="editar_aluno.html?id=${aluno.id}" class="btn-acao btn-editar">Editar</a>
+                            <button class="btn-acao btn-apagar" data-id="${aluno.id}">Apagar</button>
+                        </td>
+                    `;
+                    corpoTabela.appendChild(tr);
+                });
+            } catch (error) {
+                console.error("Erro ao listar alunos:", error);
+            }
+        }
+
+        async function apagarAluno(id) {
+            if (confirm('Tem certeza que deseja apagar este aluno?')) {
+                try {
+                    await fetch(`${apiBaseUrl}/${id}`, { method: 'DELETE' });
+                    await renderizarLista();
+                } catch (error) {
+                    console.error("Erro ao apagar aluno:", error);
+                }
+            }
+        }
+
+        
+        corpoTabela.addEventListener('click', (event) => {
+            if (event.target.classList.contains('btn-apagar')) {
+                const id = event.target.dataset.id; 
+                apagarAluno(id);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', renderizarLista);
+    </script>
+</body>
+</html>

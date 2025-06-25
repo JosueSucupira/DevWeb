@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Aluno</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <h1>Criar Novo Aluno</h1>
+    <div class="form-container">
+        <form id="aluno-form">
+            <input type="text" id="aluno-nome" placeholder="Nome do Aluno" required>
+            <input type="text" id="aluno-curso" placeholder="Curso" required>
+            <input type="number" step="0.1" id="aluno-ira" placeholder="IRA" required>
+            <div class="form-buttons">
+                <button type="submit" class="btn-principal">Salvar Novo Aluno</button>
+                <a href="listar_alunos.html">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const apiBaseUrl = 'http://localhost:3000/api/alunos';
+        const form = document.getElementById('aluno-form');
+
+        async function criarAluno(event) {
+            event.preventDefault(); 
+
+            const aluno = {
+                nome: document.getElementById('aluno-nome').value,
+                curso: document.getElementById('aluno-curso').value,
+                ira: parseFloat(document.getElementById('aluno-ira').value)
+            };
+
+            try {
+                await fetch(apiBaseUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(aluno)
+                });
+                
+                window.location.href = 'listar_alunos.html';
+            } catch (error) {
+                console.error("Erro ao criar aluno:", error);
+                alert("Falha ao criar aluno. Verifique o console.");
+            }
+        }
+
+        
+        form.addEventListener('submit', criarAluno);
+    </script>
+</body>
+</html>

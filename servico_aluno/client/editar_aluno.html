@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Aluno</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <h1>Editar Aluno</h1>
+    <div class="form-container">
+        <form id="aluno-form">
+            <input type="text" id="aluno-nome" placeholder="Nome do Aluno" required>
+            <input type="text" id="aluno-curso" placeholder="Curso" required>
+            <input type="number" step="0.1" id="aluno-ira" placeholder="IRA" required>
+            <div class="form-buttons">
+                <button type="submit" class="btn-principal">Salvar Alterações</button>
+                <a href="listar_alunos.html">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const apiBaseUrl = 'http://localhost:3000/api/alunos';
+        const form = document.getElementById('aluno-form');
+        const params = new URLSearchParams(window.location.search);
+        const alunoId = params.get('id'); 
+
+        async function carregarDadosParaEdicao() {
+            if (!alunoId) {
+                alert('ID do aluno não fornecido!');
+                window.location.href = 'listar_alunos.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${apiBaseUrl}/${alunoId}`);
+                if (!response.ok) throw new Error('Aluno não encontrado');
+                
+                const aluno = await response.json();
+                document.getElementById('aluno-nome').value = aluno.nome;
+                document.getElementById('aluno-curso').value = aluno.curso;
+                document.getElementById('aluno-ira').value = aluno.ira;
+            } catch (error) {
+                console.error("Erro ao carregar dados do aluno:", error);
+                alert("Não foi possível carregar os dados do aluno.");
+                window.location.href = 'listar_alunos.html';
+            }
+        }
+
+        async function salvarAlteracoes(event) {
+            event.preventDefault();
+
+            const alunoAtualizado = {
+                nome: document.getElementById('aluno-nome').value,
+                curso: document.getElementById('aluno-curso').value,
+                ira: parseFloat(document.getElementById('aluno-ira').value)
+            };
+
+            try {
+                await fetch(`${apiBaseUrl}/${alunoId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(alunoAtualizado)
+                });
+                
+                window.location.href = 'listar_alunos.html';
+            } catch (error) {
+                console.error("Erro ao salvar alterações:", error);
+                alert("Falha ao salvar alterações.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarDadosParaEdicao);
+        form.addEventListener('submit', salvarAlteracoes);
+    </script>
+</body>
+</html>
