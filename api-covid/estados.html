@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid nos estados brasileiros</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Covid nos estados brasileiros</h1>
+    </header>
+
+    <a href="paises.html" class="botao-navegacao">Ver Dados por País</a>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome do Estado</th>
+                    <th>Abreviação</th>
+                    <th>Número de Casos</th>
+                    <th>Número de Suspeitos</th>
+                    <th>Número de Falecidos</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+        </table>
+
+        <div id="resultados">
+            <p id="media-casos"></p>
+            <p id="media-suspeitos"></p>
+            <p id="media-falecimentos"></p>
+
+            <p id="maior-relacao"></p>
+            <p id="menor-relacao"></p>
+        </div>
+
+        <div class="legenda">
+            <span class="cor-legenda"></span>
+            <span>Estados com número de falecimentos acima da média.</span>
+        </div>
+    </main>
+
+</body>
+<script src="js/estados.js"></script>
+
+</html>
